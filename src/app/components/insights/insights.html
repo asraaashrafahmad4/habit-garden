@@ -1,0 +1,75 @@
+<div class="insight-page">
+    <header class="insight-header">
+        <span class="eyeblew">YOUR PROGRESS</span>
+        <h1>Garden Insights 🌿</h1>
+        <p>Small steps, beautiful growth.</p>
+    </header>
+
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Habits</h3>
+            <p>{{ getTotalHabits() }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Completed Today</h3>
+            <p>{{ getCompletedToday() }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Overall Progress</h3>
+            <p>{{ getOverallProgress() | number:'1.0-0' }}%</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Goals</h3>
+            <p>{{ getTotalGoals() }}</p>
+        </div>
+    </div>
+
+
+    <!-- Weekly Activity Chart -->
+
+    <div class="chart-card">
+
+        <div class="chart-header">
+            <h2>Weekly Activity</h2>
+            <p>Your completed habits over the last 7 days</p>
+        </div>
+        <div class="chart-container">
+            <canvas baseChart [data]="weeklyChartData" [options]="weeklyChartOptions" type="bar"></canvas>
+        </div>
+    </div>
+
+    <!-- Daily Progress Chart -->
+    <div class="chart-card">
+
+        <div class="chart-header">
+            <h2>Daily Progress</h2>
+            <p>Your completed habits today</p>
+        </div>
+
+        <!-- Daily Progress Chart -->
+        <div class="chart-card">
+
+            <div class="chart-header">
+                <h2>Daily Progress</h2>
+                <p>Your completed habits today</p>
+            </div>
+
+            <div class="chart-container doughnut-container">
+
+                <div class="chart-center">
+                    {{ getDailyProgressPercentage() }}%
+                </div>
+
+                <canvas baseChart [data]="doughnutChartData" [options]="doughnutChartOptions" type="doughnut">
+                </canvas>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<form [formGroup]="habitForm" (ngSubmit)="onSubmit()">
+
+
+    <div class="name">
+        <label> Name Habit</label>
+        <input type="text" formControlName="name">
+    </div>
+    <div class="color">
+        <label> color </label>
+        <input type="text" formControlName="color">
+
+    </div>
+
+    <div class="frequency">
+        <label>frequency</label>
+        <select formControlName="frequency">
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+        </select>
+
+        @if (habitForm.get("frequency")?.value==="daily"){
+        <div class="daily">
+            <label>Coal Days</label>
+            <input type="number" formControlName="goalDays">
+        </div>
+        } @else {
+        <div class="weekly">
+            <label>Times Per Week</label>
+            <input type="number" formControlName="timesPerweek">
+        </div>
+        <div>
+            <label>Goal Weeks</label>
+            <input type="number" formControlName="goalWeeks">
+        </div>
+        }
+    </div>
+    <button type="submit">Add Habit</button>
+</form>

@@ -1,0 +1,41 @@
+@for(habit of habitService.habit ;track habit.id){
+<div class="habit-card" [style.border-left-color]="habit.color">
+
+    <div class="plant-container">
+        <img [src]="plantImage[habitService.getPlantStage(habit)]" [alt]="habit.name + ' plant'" class="plant-image" />
+    </div>
+
+    @if (editingHabitId === habit.id) {
+    <input type="text" [(ngModel)]="editedName">
+
+    <button type="button" (click)="saveEdit(habit.id)">
+        Save
+    </button>
+    } @else {
+    <h3>{{habit.name}}</h3>
+
+    <button type="button" (click)="startEdit(habit)">
+        Edit
+    </button>
+    } <p>Plant Stage: {{ habitService.getPlantStage(habit) }}</p>
+    <p>{{habit.frequency }}</p>
+
+    @if(habit.completedDates.includes(today)){
+    <p> Completed Today!</p>
+    <button disabled>
+        Completed ✓
+    </button>
+
+
+    }@else{
+    <p class="pending">Your plant is waiting </p>
+
+    <button (click)="habitService.markAsDone(habit.id)">
+        Mark as Done
+    </button>
+
+    }
+
+    <button type="button" (click)="habitService.deleteHabit(habit.id)">Delete</button>
+</div>
+}

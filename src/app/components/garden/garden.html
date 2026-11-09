@@ -1,0 +1,145 @@
+<section class="garden">
+    <div class="container py-4">
+
+        <!-- Welcome Section -->
+        <div class="welcome mb-5">
+            <div>
+                <span class="welcome-label">YOUR PERSONAL GARDEN 🌿</span>
+                <h1>Welcome back, Esraa!</h1>
+                <p>Every small step makes your garden grow.</p>
+            </div>
+        </div>
+
+        <!-- static -->
+        <div class="row g-4 mb-5">
+
+            <div class="col-md-6">
+                <div class="start-card">
+                    <div class="card-icon">
+                        <i class="bi bi-flower2"></i>
+                    </div>
+                    <div>
+                        <h3>{{habits.length}}</h3>
+                        <p> Total Habits</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="start-card">
+                    <div class="card-icon completed-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                    <div>
+                        <h3>{{getCompletedToday()}}</h3>
+                        <p>Completed Today</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="start-card">
+                    <div class="card-icon completed-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <div>
+                        <h3>{{getOverallProgress().toFixed(1)}}%</h3>
+                        <p>Overall Progress</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="start-card">
+                    <div class="card-icon">
+                        <i class="bi bi-trophy"></i>
+                    </div>
+                    <div>
+                        <h3>{{getGoals()}}</h3>
+                        <p> Total Goals</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="start-card">
+                    <div class="card-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h3>{{getTotalAvailableDays()}}</h3>
+                        <p> Total Available Days</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <!-- Habits Section -->
+        <div class="habits-section">
+
+            <div class="header">
+                <div>
+                    <h2>My Garden</h2>
+                    <p>Take care of your habits, one day at a time.</p>
+                </div>
+            </div>
+
+
+            <!-- habit card -->
+            <div class="row g-4">
+
+                @for(habit of habits; track habit.id){
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="habit-card h-100">
+                        <div class="habit-card-top">
+                            <div class="plant-container">
+                                <img [src]="plantImage[habitService.getPlantStage(habit)]" [alt]="habit.name + ' plant'"
+                                    class="plant-image" />
+                            </div>
+                            <span class="frequency">
+                                {{ habit.frequency }}
+                            </span>
+                        </div>
+                        <h4>{{ habit.name }}</h4>
+
+                        <p class="habit-description">
+                            Keep growing and stay consistent.
+                        </p>
+                        <div class="streak-info">
+                            <i class="bi bi-fire"></i>
+                            <span>{{ getCurrentStreak(habit) }} Day Streak</span>
+                        </div>
+                        <div class="streak-info">
+                            <i class="bi bi-trophy"></i>
+                            <span>{{getLongestStreak(habit)}}</span>
+                        </div>
+
+                        <div class="habit-progress">
+                            <div class="progress-info">
+                                <span>Completed days</span>
+                                <strong>{{ habit.completedDates.length }}</strong>
+                            </div>
+
+                            <div class="progress">
+                                <div class="progress-bar" [style.width.%]="getProgress(habit)">
+                                </div>
+                            </div>
+
+                        </div>
+                        <button class="complete-btn" (click)="markAsDone(habit.id)">
+                            <i class="bi bi-check2"></i>
+                            Mark as Done
+                        </button>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

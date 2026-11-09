@@ -1,0 +1,31 @@
+.navbar {
+    background-color: ffffff;
+    box-shadow: 0 2px 12px rgba(52, 68, 58, 0.06);
+}
+
+.navbar-brand {
+    color: #3D6B50;
+}
+
+.nav-link {
+    color: #34443A;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.nav-link,
+.nav-link.active:hover {
+    color: #3D6B50;
+}
+
+.btn {
+    background-color: #3D6B50;
+    color: white;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #34443A;
+      color: white;
+
+}
