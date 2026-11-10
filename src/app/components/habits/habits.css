@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 28px;
-    padding: 30px;
+    padding: 70px;
     background: #f5f7ef;
 }
 
@@ -130,5 +130,108 @@
 
     .habit-card {
         padding: 20px;
+    }
+}
+
+
+.modal-overlay {
+    background: rgba(30, 45, 32, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    z-index: 1050;
+}
+
+.delete-modal {
+    background: #fffefa;
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+    animation: modalAppear 0.25s ease;
+}
+
+.modal-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 18px;
+    background: #fcebea;
+    color: #c75b52;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+}
+
+/* Title */
+.delete-modal h3 {
+    color: #344b35;
+    font-size: 23px;
+    margin-bottom: 12px;
+}
+
+/* Description */
+.delete-modal p {
+    color: #84917e;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.delete-modal strong {
+    color: #344b35;
+}
+
+/* Buttons */
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.modal-actions button {
+    border: none;
+    padding: 11px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cancel-btn {
+    background: #edf1e9;
+    color: #344b35;
+}
+
+.confirm-btn {
+    background: #c75b52;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: #dfe7d9;
+}
+
+.confirm-btn:hover {
+    background: #ad463e;
+}
+
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)scale(1);
     }
 }

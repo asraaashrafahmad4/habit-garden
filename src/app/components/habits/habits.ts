@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { HabitService } from '../../services/habit';
-import {Habit as HabitModel } from '../models/habit.model'
+import { Habit as HabitModel } from '../models/habit.model'
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -24,6 +24,10 @@ export class Habits {
 
   editingHabitId: number | null = null
   editedName: string = ""
+  showDeleteModal = false;
+  selectedHabitId: number | null = null;
+  selectedHabitName = '';
+
 
   startEdit(habit: HabitModel) {
     this.editingHabitId = habit.id
@@ -35,6 +39,31 @@ export class Habits {
     }
     this.habitService.editHabit(id, this.editedName.trim())
     this.editingHabitId = null;
-      this.editedName = "";
+    this.editedName = "";
   }
+
+
+  openDeleteModal(habit: HabitModel) {
+    this.selectedHabitId = habit.id
+    this.selectedHabitName = habit.name
+    this.showDeleteModal = true
+  }
+
+
+  cancelDelete() {
+    this.selectedHabitId = null
+    this.showDeleteModal = false
+
+
+  }
+  confirmDelete() {
+
+    if (this.selectedHabitId === null) return
+
+    this.habitService.deleteHabit(this.selectedHabitId);
+    this.cancelDelete();
+
+  }
+
+
 }

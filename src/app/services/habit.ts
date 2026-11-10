@@ -7,34 +7,7 @@ import { Router } from '@angular/router';
 })
 export class HabitService {
 
-    private readonly defaultHabits: HabitModel[] = [{
-        id: 1,
-        name: 'Reading',
-        color: '#3D6B50',
-        createdAt: new Date(),
-        frequency: 'daily',
-        completedDates: [],
-        goalDays: 20
-    },
-    {
-        id: 2,
-        name: 'Exercise',
-        color: '#D9B779',
-        createdAt: new Date(),
-        frequency: 'daily',
-        completedDates: [],
-        goalDays: 60
-    },
-    {
-        id: 3,
-        name: 'Learning Angular',
-        color: '#A8C69F',
-        createdAt: new Date(),
-        frequency: 'daily',
-        completedDates: [],
-        goalDays: 20
-    }
-
+    private readonly defaultHabits: HabitModel[] = [
     ]
 
 
