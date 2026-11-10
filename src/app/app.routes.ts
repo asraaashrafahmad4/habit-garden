@@ -6,7 +6,7 @@ import { Habits } from './components/habits/habits';
 
 
 export const routes: Routes = [
-{path:"",redirectTo:'garden',pathMatch:'full'}
+    { path: "", redirectTo: 'garden', pathMatch: 'full' },
     { path: 'garden', component: Garden },
     { path: 'habits', component: Habits },
     { path: 'insights', component: Insights },
