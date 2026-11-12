@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Habit as HabitModel } from '../models/habit.model';
 import { HabitService } from '../../services/habit';
 
@@ -23,10 +23,10 @@ export class Garden {
 
   deferredPrompt: BeforeInstallPromptEvent | null = null;
 
-  showInstallButton = false;
-
+  showInstallButton = signal(false);
   constructor() {
     window.addEventListener('beforeinstallprompt', (event: Event) => {
+
 
       console.log('Install event fired!');
 
@@ -34,10 +34,12 @@ export class Garden {
 
       this.deferredPrompt = event as BeforeInstallPromptEvent;
 
-      this.showInstallButton = true;
-
+      this.showInstallButton.set(true);
     });
-
+    window.addEventListener('appinstalled', () => {
+      this.showInstallButton.set(false);
+      this.deferredPrompt = null;
+    });
   }
 
 
@@ -52,9 +54,8 @@ export class Garden {
     const result = await this.deferredPrompt.userChoice;
 
     if (result.outcome === 'accepted') {
-      this.showInstallButton = false;
+      this.showInstallButton.set(false);
     }
-
     this.deferredPrompt = null;
   }
 
