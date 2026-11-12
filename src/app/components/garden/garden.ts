@@ -2,6 +2,16 @@ import { Component, inject } from '@angular/core';
 import { Habit as HabitModel } from '../models/habit.model';
 import { HabitService } from '../../services/habit';
 
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt(): Promise<void>;
+
+  userChoice: Promise<{
+    outcome: 'accepted' | 'dismissed';
+    platform: string;
+  }>;
+}
+
 @Component({
   imports: [],
   selector: 'app-garden',
@@ -10,6 +20,44 @@ import { HabitService } from '../../services/habit';
 })
 export class Garden {
   habitService = inject(HabitService);
+
+  deferredPrompt: BeforeInstallPromptEvent | null = null;
+
+  showInstallButton = false;
+
+  constructor() {
+    window.addEventListener('beforeinstallprompt', (event: Event) => {
+
+      console.log('Install event fired!');
+
+      event.preventDefault();
+
+      this.deferredPrompt = event as BeforeInstallPromptEvent;
+
+      this.showInstallButton = true;
+
+    });
+
+  }
+
+
+  async installApp() {
+
+    if (!this.deferredPrompt) {
+      return;
+    }
+
+    await this.deferredPrompt.prompt();
+
+    const result = await this.deferredPrompt.userChoice;
+
+    if (result.outcome === 'accepted') {
+      this.showInstallButton = false;
+    }
+
+    this.deferredPrompt = null;
+  }
+
   get habits(): HabitModel[] {
     return this.habitService.habit
   }

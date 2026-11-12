@@ -7,6 +7,25 @@
                 <span class="welcome-label">YOUR PERSONAL GARDEN 🌿</span>
                 <h1>Welcome to Your Garden 🌿</h1>
                 <p>Every small step makes your garden grow.</p>
+                @if (showInstallButton) {
+                <div class="install-card mt-4">
+                    <div>
+                        <h4>
+                            <i class="bi bi-phone"></i>
+                            Take Your Garden With You!
+                        </h4>
+
+                        <p>
+                            Install Habit Garden and access your habits anytime.
+                        </p>
+                    </div>
+
+                    <button class="install-btn" (click)="installApp()">
+                        <i class="bi bi-download"></i>
+                        Install Now
+                    </button>
+                </div>
+                }
             </div>
         </div>
 
