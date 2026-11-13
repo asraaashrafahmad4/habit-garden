@@ -1,34 +1,39 @@
-/* Habit Cards Container */
+/* Habits list */
 :host {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    gap: 28px;
-    padding: 70px;
-    background: #f5f7ef;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
 }
 
 /* Habit Card */
 .habit-card {
-    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    box-sizing: border-box;
     background: #fffefa;
     border-radius: 24px;
-    padding: 25px;
-    border-left: 6px solid;
+    padding: 24px 28px;
+    border-left: 6px solid #78966d;
     box-shadow: 0 8px 25px rgba(52, 75, 48, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
 }
 
 .habit-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     box-shadow: 0 15px 35px rgba(52, 75, 48, 0.15);
 }
 
 /* Plant */
 .plant-container {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 20px;
+    flex: none;
+    width: 112px;
+    height: 112px;
     background: #edf3e5;
     border-radius: 50%;
     display: flex;
@@ -37,8 +42,8 @@
 }
 
 .plant-image {
-    width: 115px;
-    height: 115px;
+    width: 84px;
+    height: 84px;
     object-fit: contain;
     transition: transform 0.4s ease;
 }
@@ -47,94 +52,132 @@
     transform: scale(1.12) rotate(-5deg);
 }
 
-/* Habit Name */
-.habit-card h3 {
-    text-align: center;
+/* Info */
+.habit-info {
+    flex: 1;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.habit-info h3 {
+    margin: 0;
     color: #344b35;
-    font-size: 23px;
-    font-weight: 700;
-    margin-bottom: 15px;
+    font-size: 22px;
+    font-weight: 600;
 }
 
-/* Text */
-.habit-card p {
-    color: #788675;
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.badge {
+    padding: 4px 14px;
+    border-radius: 14px;
+    background: #e8f0e6;
+    color: #2f5a40;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.status {
+    margin: 0;
+    color: #5f6f5b;
     font-size: 14px;
-    margin: 12px 0;
 }
 
-.habit-card .pending {
-    color: #c28a45;
+.status.pending {
+    align-self: flex-start;
+    color: #8a5a1f;
     background: #fff6e8;
-    padding: 10px;
+    padding: 6px 12px;
     border-radius: 10px;
-    text-align: center;
 }
 
-/* Inputs */
-.habit-card input {
+/* Input (edit mode) */
+.habit-info input {
     width: 100%;
+    max-width: 320px;
     padding: 11px;
     border: 1px solid #dce5d5;
     border-radius: 10px;
     outline: none;
-    margin-bottom: 12px;
     box-sizing: border-box;
+    font-family: inherit;
 }
 
-.habit-card input:focus {
+.habit-info input:focus {
     border-color: #78966d;
 }
 
 /* Buttons */
-.habit-card button {
+.habit-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.habit-actions button {
+    min-height: 44px;
+    padding: 0 18px;
     border: none;
-    border-radius: 12px;
-    padding: 10px 16px;
-    margin: 5px 3px;
+    border-radius: 14px;
     background: #66845d;
-    color: white;
+    color: #fff;
+    font-family: inherit;
     font-weight: 600;
     cursor: pointer;
     transition: 0.25s ease;
 }
 
-.habit-card button:hover:not(:disabled) {
+.habit-actions button:hover:not(:disabled) {
     background: #456442;
     transform: translateY(-2px);
 }
 
-.habit-card button:disabled {
+.habit-actions button:disabled {
     background: #dcebd5;
-    color: #54734c;
+    color: #2f5a40;
     cursor: not-allowed;
 }
 
-/* Delete Button */
-.habit-card button:last-child {
-    background: #f5e8e5;
-    color: #b45f53;
+.habit-actions .edit-btn {
+    background: transparent;
+    color: #2f5a40;
+    border: 1.5px solid #66845d;
 }
 
-.habit-card button:last-child:hover {
+.habit-actions .edit-btn:hover:not(:disabled) {
+    background: #e8f0e6;
+}
+
+.habit-actions .delete-btn {
+    background: #f5e8e5;
+    color: #9a4338;
+}
+
+.habit-actions .delete-btn:hover:not(:disabled) {
     background: #efd5d0;
 }
 
 /* Responsive */
 @media (max-width: 600px) {
     :host {
-        grid-template-columns: 1fr;
-        padding: 15px;
-        gap: 18px;
+        padding: 20px 15px;
+        gap: 16px;
     }
 
     .habit-card {
         padding: 20px;
     }
-}
 
-
-.modal-overlay {
+    .habit-actions {
+        width: 100%;
+    }
+}.modal-overlay {
     background: rgba(30, 45, 32, 0.55);
     display: flex;
     justify-content: center;
@@ -233,5 +276,13 @@
     to {
         opacity: 1;
         transform: translateY(0)scale(1);
+    }
+}
+
+@media(max-width:600px) {
+    :host {
+        grid-template-columns: 1fr;
+        padding: 20px 15px;
+        gap: 18px;
     }
 }

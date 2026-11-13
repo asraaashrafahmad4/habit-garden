@@ -5,39 +5,46 @@
         <img [src]="plantImage[habitService.getPlantStage(habit)]" [alt]="habit.name + ' plant'" class="plant-image" />
     </div>
 
-    @if (editingHabitId === habit.id) {
-    <input type="text" [(ngModel)]="editedName">
+    <div class="habit-info">
 
-    <button type="button" (click)="saveEdit(habit.id)">
-        Save
-    </button>
-    } @else {
-    <h3>{{habit.name}}</h3>
+        @if (editingHabitId === habit.id) {
+        <input type="text" [(ngModel)]="editedName" aria-label="habit name">
+        } @else {
+        <h3 dir="auto">{{habit.name}}</h3>
 
-    <button type="button" (click)="startEdit(habit)">
-        Edit
-    </button>
-    } <p>Plant Stage: {{ habitService.getPlantStage(habit) }}</p>
-    <p>{{habit.frequency }}</p>
+        }
+        <div class="badges">
+            <span class="badge">{{habit.frequency }}</span>
+            <span class="badge">Plant Stage: {{ habitService.getPlantStage(habit) }}</span>
+        </div>
 
-    @if(habit.completedDates.includes(today)){
-    <p> Completed Today!</p>
-    <button disabled>
-        Completed ✓
-    </button>
+        @if(habit.completedDates.includes(today)){
+        <p class="status"> Completed Today</p>
+        } @else{
+        <p class="status pending">Your plant is waiting </p>
+        }
+    </div>
 
+    <div class="habit-actions">
+        @if(habit.completedDates.includes(today)){
+        <button disabled class="button"> Completed </button>
+        }@else{
+        <button class="button" (click)="habitService.markAsDone(habit.id)"> Mark as Done
+        </button>
 
-    }@else{
-    <p class="pending">Your plant is waiting </p>
+        }
 
-    <button (click)="habitService.markAsDone(habit.id)">
-        Mark as Done
-    </button>
+        @if (editingHabitId === habit.id) {
+        <button type="button" (click)="saveEdit(habit.id)" class="edit-btn">Save </button>
+        }@else{
+        <button type="button" (click)="startEdit(habit)" class="edit-btn"> Edit </button>
 
-    }
-    <button type="button" (click)="openDeleteModal(habit)">
-        Delete
-    </button>
+        }
+
+        <button type="button" (click)="openDeleteModal(habit) " class="delete-btn">
+            Delete
+        </button>
+    </div>
 
 </div>
 
